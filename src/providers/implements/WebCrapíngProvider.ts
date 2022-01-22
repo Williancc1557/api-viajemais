@@ -18,7 +18,6 @@ export class WebScrapingProvider implements IWebScrapingProvider {
                 const cost: Array<string> = [];
                 const boarding = $(element).find(".dep-time").text();
                 let landing: string;
-                console.log($(element).find(".arr-time").text());
 
                 try {
                     // eslint-disable-next-line @typescript-eslint/no-magic-numbers

@@ -18,7 +18,6 @@ export class SeleniumProvider implements ISeleniumProvider {
 
         await driver.get(this.url);
 
-
         await driver.findElement(By.id("btnSearchPurchase")).click();
 
         const openSearchSleep = 1000;
@@ -72,8 +71,6 @@ export class SeleniumProvider implements ISeleniumProvider {
 
         const data = await driver.getPageSource();
         return data;
-
-
     }
 }
 
