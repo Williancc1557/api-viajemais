@@ -11,7 +11,6 @@ export class SearchTicketsUseCase {
 
     public async execute(data: ISearchTicketsDTO) {
         const tickets = new Tickets(data);
-        console.log(tickets);
         const html = await this.selenium.find(tickets);
         const responseJson = this.webScraping.getJsonTickets(html, tickets);
         return responseJson;

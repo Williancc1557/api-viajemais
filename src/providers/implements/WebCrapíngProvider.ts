@@ -17,7 +17,16 @@ export class WebScrapingProvider implements IWebScrapingProvider {
                 const duration = $(element).find(".flight-duration-info").text().split(" ")[durationLocate];
                 const cost: Array<string> = [];
                 const boarding = $(element).find(".dep-time").text();
-                const desembarque = $(element).find(".arr-time").text();
+                let landing: string;
+                console.log($(element).find(".arr-time").text());
+
+                try {
+                    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+                    landing = $(element).find(".arr-time").text().split(". ")[1].split("\n")[0];
+                } catch {
+                    landing = data.exitDate + " " + $(element).find(".arr-time").text();
+                }
+
                 $(element).find(".fare-price").each((indexPrice: number, elementPrice: cheerio.Element) => {
                     cost.push($(elementPrice).text());
                 });
@@ -29,10 +38,12 @@ export class WebScrapingProvider implements IWebScrapingProvider {
                     destino: data.origin,
                     origem: data.destiny,
                     embarque: data.exitDate + " " + boarding,
-                    desembarque: " " + desembarque,
+                    desembarque: landing,
                 });
             });
         });
+        const getNullError = 0;
+        if (!request[getNullError]) throw new Error("Already exists this flight");
         return request;
     }
 }

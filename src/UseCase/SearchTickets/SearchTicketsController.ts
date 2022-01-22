@@ -18,6 +18,7 @@ export class SearchTicketsController {
                 kid: criancas,
                 returnDate: datavolta,
             });
+            console.log("test");
             res.json(response);
         } catch (err) {
             res.json(err.message);

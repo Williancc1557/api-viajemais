@@ -49,12 +49,25 @@ export class SeleniumProvider implements ISeleniumProvider {
             }
         }
 
-        const msSleepForSendSearch = 2000;
+        const msSleepForSendSearch = 5000;
         await driver.sleep(msSleepForSendSearch);
+        while (true) {
+            try {
+                await driver.findElement(By.css("[data-tag-name='buscar-passagens']")).click();
+                const sleepForClick = 500;
+                await driver.sleep(sleepForClick);
+                break;
+            } catch {
+                const sleepForErrorClick = 1000;
+                await driver.sleep(sleepForErrorClick);
+            }
+        }
+        try {
+            await driver.findElement(By.css("[data-tag-name='buscar-passagens']")).click();
+        } catch { }
 
-        await driver.findElement(By.css("[data-tag-name='buscar-passagens']")).click();
 
-        const msSleepForGetHtmlPage = 4000;
+        const msSleepForGetHtmlPage = 5000;
         await driver.sleep(msSleepForGetHtmlPage);
 
         const data = await driver.getPageSource();
